@@ -44,7 +44,7 @@ func (c *Coordinator) AssignNewJobForWorker(args *AskForNewJobArgs, reply *AskFo
 		go c.WaitAndCheckIfMapWorkerCrashed(reply.MapperId)
 		c.mu.Unlock()
 	} else if !c.CheckIfAllMapperFinished() { // some mapper jobs haven't finished yet, can't start reducer job
-		fmt.Printf("[Coordinator] not all mapper jobs have finished\n")
+		fmt.Printf("[Coordinator] not all mapper jobs have finished.\n")
 		c.mu.Unlock()
 	} else if !c.CheckIfAllReducerStarted() {
 		c.AssignNewFileForReducer(reply)
