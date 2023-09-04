@@ -1,26 +1,5 @@
 package mr
 
-<<<<<<< HEAD
-import "log"
-import "net"
-import "os"
-import "net/rpc"
-import "net/http"
-
-
-type Coordinator struct {
-	// Your definitions here.
-
-}
-
-// Your code here -- RPC handlers for the worker to call.
-
-//
-// an example RPC handler.
-//
-// the RPC argument and reply types are defined in rpc.go.
-//
-=======
 import (
 	"fmt"
 	"log"
@@ -52,18 +31,11 @@ const ToleranceTimeForCrashTest = 10
 // an example RPC handler.
 //
 // the RPC argument and reply types are defined in rpc.go.
->>>>>>> lab1-map-reduce
 func (c *Coordinator) Example(args *ExampleArgs, reply *ExampleReply) error {
 	reply.Y = args.X + 1
 	return nil
 }
 
-<<<<<<< HEAD
-
-//
-// start a thread that listens for RPCs from worker.go
-//
-=======
 func (c *Coordinator) AssignNewJobForWorker(args *AskForNewJobArgs, reply *AskForNewJobReply) error {
 	c.mu.Lock()
 	if !c.CheckIfAllMapperStarted() {
@@ -219,45 +191,12 @@ func (c *Coordinator) CheckIfAllReducerFinished() bool {
 }
 
 // start a thread that listens for RPCs from worker.go
->>>>>>> lab1-map-reduce
 func (c *Coordinator) server() {
 	rpc.Register(c)
 	rpc.HandleHTTP()
 	//l, e := net.Listen("tcp", ":1234")
 	sockname := coordinatorSock()
 	os.Remove(sockname)
-<<<<<<< HEAD
-	l, e := net.Listen("unix", sockname)
-	if e != nil {
-		log.Fatal("listen error:", e)
-	}
-	go http.Serve(l, nil)
-}
-
-//
-// main/mrcoordinator.go calls Done() periodically to find out
-// if the entire job has finished.
-//
-func (c *Coordinator) Done() bool {
-	ret := false
-
-	// Your code here.
-
-
-	return ret
-}
-
-//
-// create a Coordinator.
-// main/mrcoordinator.go calls this function.
-// nReduce is the number of reduce tasks to use.
-//
-func MakeCoordinator(files []string, nReduce int) *Coordinator {
-	c := Coordinator{}
-
-	// Your code here.
-
-=======
 	listener, err := net.Listen("unix", sockname)
 	if err != nil {
 		log.Fatal("listen error:", err)
@@ -304,7 +243,6 @@ func MakeCoordinator(files []string, nReduce int) *Coordinator {
 		c.ReducerStarted[reducerId] = false
 		c.MapperFinished[reducerId] = false
 	}
->>>>>>> lab1-map-reduce
 
 	c.server()
 	return &c

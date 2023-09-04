@@ -6,15 +6,10 @@ package mr
 // remember to capitalize all names.
 //
 
-<<<<<<< HEAD
-import "os"
-import "strconv"
-=======
 import (
 	"os"
 	"strconv"
 )
->>>>>>> lab1-map-reduce
 
 //
 // example to show how to declare the arguments
@@ -31,8 +26,6 @@ type ExampleReply struct {
 
 // Add your RPC definitions here.
 
-<<<<<<< HEAD
-=======
 type AskForNewJobArgs struct {
 	WorkerNum int
 }
@@ -60,7 +53,6 @@ type ReduceFinishedArgs struct {
 type ReduceFinishedReply struct {
 	Acknowledged bool
 }
->>>>>>> lab1-map-reduce
 
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the coordinator.
